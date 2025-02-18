@@ -44,7 +44,7 @@ function msessagesWS() {
 // typing indicators*********************************************
 let typingTimers = {};
 function showTypingIndicator(user) {
-  const chatContainer = document.getElementById("chat")
+  const chatContainer = document.getElementById("typing")
   if (!chatContainer) return;
 
   let typingDiv = document.getElementById(`typing_${user}`);
@@ -130,7 +130,6 @@ async function sendMessage(btn) {
   messageInput.value = "";
 }
 
-// Send typing notification to the backend
 function sendTypingNotification(receiver, isTyping) {
   if (!socket || socket.readyState !== WebSocket.OPEN) return;
   socket.send(
@@ -142,20 +141,13 @@ function sendTypingNotification(receiver, isTyping) {
   );
 }
 
-// Detect when user starts typing and send notification
-let typingTimeout;
 document.getElementById("messageInput").addEventListener("input", function () {
   const receiver = document.querySelector("[sendto]")?.getAttribute("sendto");
   if (!receiver) return;
 
-  // Send "typing" status
+//Send "typing" status
   sendTypingNotification(receiver, true);
 
-  // Clear previous timeout and set a new one to stop typing notification
-  clearTimeout(typingTimeout);
-  typingTimeout = setTimeout(() => {
-    sendTypingNotification(receiver, false);
-  }, 3000); // Stops typing after 3 seconds of inactivity
 });
 
 
