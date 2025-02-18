@@ -43,36 +43,62 @@ function msessagesWS() {
 }
 // typing indicators*********************************************
 let typingTimers = {};
+let isAlredyAdd = false
 function showTypingIndicator(user) {
-  const chatContainer = document.getElementById("typing")
+  if(isAlredyAdd) return
+
+  const chatContainer = document.getElementById(`contaner_${user}`)
   if (!chatContainer) return;
 
-  let typingDiv = document.getElementById(`typing_${user}`);
-  if (!typingDiv) {
-    typingDiv = document.createElement("div");
-    typingDiv.id = `typing_${user}`;
-    typingDiv.className = "typing-indicator";
-    typingDiv.innerText = `${user} is typing...`;
-    chatContainer.appendChild(typingDiv);
-  }
+  // let typingDiv = document.getElementById(`typing_${user}`);
+  // if (!typingDiv) {
 
-  // here we clear if the user is typing againe
-  if (typingTimers[user]) {
-    clearTimeout(typingTimers[user]);
-  }
+  let typingDiv = document.createElement("div");
+  typingDiv.id = `typingg${user}`;
+  // typingDiv.className = "typing-indicator";
+  typingDiv.innerHTML = `<div class="loading">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          </div>`;
 
-  typingTimers[user] = setTimeout(() => {
-    hideTypingIndicator(user);
+  chatContainer.appendChild(typingDiv)
+  isAlredyAdd = true
+  //}
+
+
+  setTimeout(() => {
+    
+    typingDiv.remove()
+    console.log('ezez');
+    isAlredyAdd = false
   }, 2000);
 
+  // here we clear if the user is typing againe
+  // if (typingTimers) {
+  //   console.log('ya rbi');
+
+  //   clearTimeout(typingTimers);
+  // }
+
+  // typingTimers = setTimeout(() => {
+  //   hideTypingIndicator(typingDiv);
+  //   console.log('ezez');
+
+  // }, 500);
+
 }
 
-function hideTypingIndicator(user) {
-  const typingDiv = document.getElementById(`typing_${user}`);
-  if (typingDiv) {
-    typingDiv.remove();
-  }
-}
+// function hideTypingIndicator(typingDiv) {
+//   const typingDiv = document.querySelector("");
+//   // console.log(typingDiv);
+
+//   if (typingDiv) {
+//     console.log("fffffffffffffff");
+
+//     typingDiv.remove();
+//   }
+// }
 
 
 
@@ -145,7 +171,7 @@ document.getElementById("messageInput").addEventListener("input", function () {
   const receiver = document.querySelector("[sendto]")?.getAttribute("sendto");
   if (!receiver) return;
 
-//Send "typing" status
+  //Send "typing" status
   sendTypingNotification(receiver, true);
 
 });
