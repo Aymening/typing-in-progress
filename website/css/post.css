@@ -1,0 +1,347 @@
+.myPosts {
+  background-color: var(--third-color);
+  width: 90%;
+  border-radius: 10px 10px 10px 10px;
+}
+
+/* category */
+.addCategory {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.selectBox {
+  position: relative;
+  cursor: pointer;
+}
+
+.selectBox select {
+  background: none;
+  color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  width: 100%;
+  height: 25px;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.checkboxes {
+  border: 1px var(--secondary-color) solid;
+  padding: 2px;
+  border-radius: 0px 0px 3px 3px;
+}
+
+.checkboxes label {
+  display: block;
+  font-size: 14px;
+}
+
+.checkboxes label:hover {
+  background-color: var(--notification-color);
+  cursor: pointer;
+}
+
+/* end category */
+
+.postProfile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px;
+  margin-bottom: 0px;
+  position: relative;
+}
+
+.postImg img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.threePoint {
+  position: absolute;
+  right: 0;
+  top: -5px;
+  cursor: pointer;
+}
+
+.addpostTitle input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  font-size: 16px;
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--secondary-color);
+}
+.addpostTitle textarea {
+  width: 100%;
+  height: 50px;
+  resize: none;
+  box-sizing: border-box;
+  padding: 15px;
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  outline: none;
+}
+
+.addpostContent, .addpostTitle {
+  margin: auto;
+}
+
+.addpostContent textarea {
+  width: 100%;
+  height: 160px;
+  resize: none;
+  box-sizing: border-box;
+  padding: 15px;
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  outline: none;
+}
+
+.postBtn {
+  margin: 15px;
+}
+
+.postBtn button {
+  width: 100%;
+  height: 30px;
+}
+
+.postDate {
+  font-size: 12px;
+  color: var(--secondary-color);
+}
+
+.postTitle, .postContent {
+  margin: 15px;
+}
+.postTitle{
+  word-wrap: break-word;
+}
+
+.postContent {
+  word-wrap: break-word;
+  color: var(--secondary-color);
+}
+
+pre{
+  white-space: normal;
+}
+
+.reaction {
+  display: inline-flex;
+  z-index: 15;
+  position: relative;
+  gap: 10px;
+  padding: 8px 12px 8px 12px;
+  background-color: var(--background);
+  border-radius: 40px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+.liked {
+  color: var(--notification-color);
+}
+
+.disliked {
+  color: var(--warning-color);
+}
+
+.popback, .popbackLogin {
+  background-color: var(--background);
+  position: fixed;
+  z-index: 19;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 70%;
+}
+
+.popbackLogin{
+  opacity: 100%;
+}
+
+.popbody {
+  background-color: var(--third-color);
+  position: fixed;
+  width: 50%;
+  z-index: 20;
+  top: 15%;
+  left: 25%;
+  border-radius: 10px;
+  border: 1px solid var(--secondary-color);
+  max-height: 80%;
+  overflow: auto;
+}
+
+.popTimes span {
+  position: absolute;
+  right: 7px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 15;
+}
+
+/*------------------ Btn alert style ---------------------*/
+
+.btnAlert {
+  font-family: "Font Awesome\ 6 Free";
+  font-size: 22px;
+}
+
+.btn-success {
+background-color: #0f5132;
+color: #fff;
+}
+.btn-danger {
+background-color: #842029;
+color: #fff;
+}
+
+.btn-info {
+background-color: #084298;
+color: #fff;
+}
+
+.btn-caution {
+background-color: #664d03;
+color: #fff;
+}
+
+.btn:active {
+transform: scale(0.98);
+box-shadow: none;
+}
+.btn:hover {
+opacity: 0.9;
+}
+
+
+/*------------------------ alert style ----------------------*/
+
+.alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  animation: fadeIm-Ou 0.3s ease;
+}
+@keyframes fadeIm-Ou {
+  0% {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.alert-container {
+  position: relative;
+  max-width: 500px;
+  margin: 1.75rem auto;
+  box-shadow: 0 0px 5px 1px rgba(0, 0, 0, 0.1);
+}
+.alert-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
+.alert-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #dee3e6;
+  background-color: inherit;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.alert-success {
+  background-color: #cff6e4;
+  color: #000000;
+  padding-left: 4rem;
+}
+.alert-success::before {
+  font-family: "Font Awesome\ 6 Free";
+  font-weight: 900;
+  content: "\f058";
+  position: absolute;
+
+  left: 18px;
+  top: 18px;
+  font-size: 2rem;
+  color: #0f5132;
+}
+.alert-info {
+  background-color: #d5e5fd;
+  color: #052d68;
+  padding-left: 4rem;
+}
+
+.alert-info::before {
+  font-family: "Font Awesome\ 6 Free";
+  font-weight: 900;
+  content: "\f27a";
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  font-size: 2rem;
+  color: #084298;
+}
+.alert-caution {
+  background-color: #fef2d0;
+  color: #342802;
+  padding-left: 4rem;
+}
+
+.alert-caution::before {
+  font-family: "Font Awesome\ 6 Free";
+  font-weight: 900;
+  content: "\f071";
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  font-size: 2rem;
+  color: #664d03;
+}
+.alert-danger {
+  background-color: #f7dfe1;
+  color: #5b161c;
+  padding-left: 4rem;
+}
+
+.alert-danger::before {
+  font-family: "Font Awesome\ 6 Free";
+  font-weight: 900;
+  content: "\f057";
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  font-size: 2rem;
+  color: #842029;
+}

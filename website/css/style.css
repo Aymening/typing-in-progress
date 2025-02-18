@@ -1,0 +1,589 @@
+* {
+  margin: 0;
+}
+
+:root {
+  --background: #1a1f25;
+  --primary-color: #e0e6ed;
+  --secondary-color: #a0a9b5;
+  --secondary-color-hover: #8b94a0;
+  --third-color: #2b323c;
+  --success-green: #4caf50;
+  --notification-color: #2196f3;
+  --notification-color-hover: #1976d2;
+  --warning-color: #f44336;
+  --warning-color-hover: #d32f2f;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--third-color);
+  border-radius: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--background);
+  border: 1px solid var(--third-color);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--primary-color);
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+}
+
+.logo {
+  height: 35px;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.leftNav {
+  border-right: 2px solid var(--third-color);
+  position: sticky;
+  height: 88.2vh;
+  top: 11.3vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.btnNotify {
+  background-color: var(--notification-color);
+}
+
+.btnNotify:hover {
+  background-color: var(--notification-color-hover);
+}
+
+.btnDelete {
+  background-color: var(--warning-color);
+}
+
+.btnDelete:hover {
+  background-color: var(--warning-color-hover);
+}
+
+.btnCancel {
+  background-color: var(--secondary-color);
+}
+
+.btnCancel:hover {
+  background-color: var(--secondary-color-hover);
+}
+
+.btn {
+  color: var(--primary-color);
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.Hline {
+  border-bottom: 2px solid var(--third-color);
+  width: 100%;
+}
+
+.topSide,
+.downSide {
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: var(--secondary-color);
+}
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.rightNav {
+  border-left: 2px solid var(--third-color);
+  display: flex;
+  flex-direction: row;
+  height: 88.2vh;
+  top: 11.3vh;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 14% 70% 18%;
+}
+
+/* @media screen and (max-width: 900px) {
+  .container {
+    display: grid;
+    grid-template-columns: 20% 0 80%;
+  }
+  .openchat {
+    grid-template-columns: 20% 0% 80%;
+    animation: open 0.4s ease-in-out;
+  }
+} */
+
+.openchat {
+  grid-template-columns: 20% 0 80%;
+  animation: open 0.4s ease-in-out;
+
+  & .leftNav {
+    & .filterCateg{
+      display: none;
+    }
+
+   & #filterCategContent{
+    display: none;
+   } 
+  }
+}
+
+@keyframes open {
+  0% {
+    grid-template-columns: 14% 70% 16%;
+  }
+
+  100% {
+    grid-template-columns: 20% 0% 80%;
+  }
+}
+
+.centerHome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin: 15px;
+  height: 85vh;
+  overflow-y: scroll;
+}
+
+.leftMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filterCateg {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  border-radius: 20px;
+  padding: 6px 12px 6px 12px;
+  cursor: pointer;
+}
+
+.filterCateg:hover {
+  background-color: var(--third-color);
+}
+
+#filterCategContent {
+  width: 80%;
+  margin-bottom: 5px;
+  padding-left: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  border-left: 1px solid var(--third-color);
+  margin-top: -13px;
+}
+
+.Fcateg {
+  padding: 2px;
+}
+
+.Fcateg:hover {
+  background-color: var(--third-color);
+  border-radius: 10px;
+}
+
+.none {
+  display: none;
+}
+
+.filterSelect {
+  background-color: var(--third-color);
+  cursor: pointer;
+  color: var(--secondary-color);
+  padding: 6px;
+  margin: 5px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+}
+
+.ChoosedCateg {
+  width: 90%;
+}
+
+.nameCateg {
+  font-size: 16px;
+}
+
+.w3-animate-zoom {
+  animation: animatezoom 0.3s;
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0.7);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.showComments {
+  margin: 10px 10px 10px 30px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.comment {
+  margin-bottom: 10px;
+  padding: 1px;
+  border-radius: 10px;
+  background-color: var(--background);
+}
+
+.seeMoreBtn {
+  background: none;
+  outline: none;
+  border: none;
+  color: var(--secondary-color);
+}
+
+.guestAddComment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.menuSettings {
+  background: var(--secondary-color);
+  color: var(--background);
+  font-weight: 600;
+  padding: 5px;
+  border-radius: 10px;
+  width: 80px;
+  position: absolute;
+  right: -35px;
+  bottom: -35px;
+  z-index: 15;
+}
+
+.choices {
+  padding: 2px;
+}
+
+.choices:hover {
+  background-color: var(--third-color);
+  color: var(--primary-color);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.popBackground {
+  position: fixed;
+  background: var(--background);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 14;
+  opacity: 0%;
+}
+
+.model {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.btnCancelDelete {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.succes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.succes i {
+  font-size: 30px;
+  color: var(--success-green);
+}
+
+.homebtn {
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+
+.imageUpload::file-selector-button {
+  margin: 15px;
+  background: none;
+  padding: 8px 12px;
+  color: var(--primary-color);
+  border-radius: 20px;
+  cursor: pointer;
+  width: 50%;
+  border: 1px solid var(--secondary-color);
+}
+
+.PostImage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px 10px;
+  background-color: #152028;
+}
+
+.PostImage img {
+  max-width: 100%;
+  max-height: 350px;
+}
+
+/* ------------------------------------ danger error */
+.body-error {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-color);
+  color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  z-index: 999;
+}
+
+.body-error h1 {
+  font-size: 40px;
+  color: var(--warning-color);
+  margin-bottom: 16px;
+}
+
+.body-error p {
+  font-size: 19px;
+  margin-bottom: 32px;
+}
+
+.body-error a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--primary-color);
+  background-color: var(--notification-color-hover);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.chat {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 87%;
+}
+
+.users_contenar {
+  overflow: scroll;
+  height: 300px;
+  width: 200px;
+  border-bottom: 2px solid var(--third-color);
+}
+
+.chatbtninput {
+  height: inherit;
+  flex-grow: 2;
+  max-width: calc(100% - 200px);
+  border-left: 2px solid var(--third-color);
+}
+
+.msgNameText {
+  border-radius: 10px;
+  background-color: var(--third-color);
+  margin: 0 5% 5px 5%;
+  padding: 10px;
+  max-width: 60%;
+  word-wrap: break-word;
+}
+
+.directionRight {
+  direction: rtl;
+  width: auto;
+  margin-left: 40%;
+  background-color: var(--notification-color-hover);
+}
+
+.messageProfile {
+  display: flex;
+  gap: 10px;
+  margin: 15px;
+  margin-bottom: 0px;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.messageImg {
+  border: 3px solid var(--warning-color);
+  width: 35px;
+  border-radius: 50%;
+}
+
+.greenOnline {
+  border: 3px solid var(--success-green);
+}
+
+.messageProfile h3 p {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.messageProfile p {
+  font-size: 12px;
+  color: var(--secondary-color);
+}
+
+.messageProfile .names {
+  flex-direction: row;
+}
+
+
+/* ========================= */
+.mydict input:focus {
+  outline: 0;
+  border-color: #2260ff;
+  box-shadow: 0 0 0 4px #b5c9fc;
+}
+
+.mydict div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  justify-content: center;
+}
+
+.mydict input[type="radio"] {
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.mydict input[type="radio"]:checked+span {
+  box-shadow: 0 0 0 0.0625em #2260ff;
+  background-color: #dee7ff;
+  z-index: 1;
+  color: #2260ff;
+}
+
+label span {
+  display: block;
+  cursor: pointer;
+  background-color: #fff;
+  padding: 0.375em .75em;
+  position: relative;
+  margin-left: .0625em;
+  box-shadow: 0 0 0 0.0625em #b5bfd9;
+  letter-spacing: .05em;
+  color: #3e4963;
+  text-align: center;
+  transition: background-color .5s ease;
+}
+
+label:first-child span {
+  border-radius: .375em 0 0 .375em;
+}
+
+label:last-child span {
+  border-radius: 0 .375em .375em 0;
+}
+
+
+.selectUser {
+  background-color: var(--third-color);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+/* --- chat ------ */
+.inputMessgae {
+  width: 70%;
+  box-sizing: border-box;
+  padding: 15px;
+  font-size: 16px;
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  outline: none;
+  border: 1px solid var(--secondary-color);
+  border-radius: 20px;
+}
+
+.send {
+  height: 51px;
+  width: 80px;
+  border-radius: 20px;
+}
+
+.sendInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 1.5em;
+  margin-right: 20px;
+  padding-bottom: 10px;
+}
+
+.close div {
+  background-color: var(--notification-color-hover);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  padding: 5px;
+}
+
+.txt {
+  font-size: 1em;
+  margin: 10px;
+  text-align: center;
+}

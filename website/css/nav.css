@@ -1,0 +1,43 @@
+.topNav {
+    border-bottom: 2px solid var(--third-color);
+    position: sticky;
+    height: 10vh;
+    margin-bottom: 1vh;
+    top: 0;
+    z-index: 20;
+    background-color: var(--background);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 50px;
+}
+
+.navMenu{
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.navMenu a {
+    font-size: 12px;
+}
+
+.topImg img{
+    border: 3px solid var(--success-green);
+    width: 35px;
+    border-radius: 50%;
+}
+
+.notification{
+    font-size: 18px;
+}
+
+.createPost{
+    padding: 6px;
+    border-radius: 20px;
+}
+
+.createPost:hover{
+    background-color: var(--third-color);
+}
