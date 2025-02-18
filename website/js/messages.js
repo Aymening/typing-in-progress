@@ -25,9 +25,11 @@ function msessagesWS() {
 
     const data = JSON.parse(msg.data);
 
-    if(data.type === "error"){      
+    if (data.type === "typing") {
+      showTypingIndicator(data.sender)
+    } else if (data.type === "error") {
       createAlert(alert("alert-danger", data.message));
-    }else if (data.type === "user_status") {
+    } else if (data.type === "user_status") {
       displayOnline(data);
     } else {
       if (data.sender === userOpenChat) {
@@ -39,28 +41,65 @@ function msessagesWS() {
     }
   };
 }
+// typing indicators*********************************************
+let typingTimers = {};
+function showTypingIndicator(user) {
+  const chatContainer = document.getElementById("chat")
+  if (!chatContainer) return;
+
+  let typingDiv = document.getElementById(`typing_${user}`);
+  if (!typingDiv) {
+    typingDiv = document.createElement("div");
+    typingDiv.id = `typing_${user}`;
+    typingDiv.className = "typing-indicator";
+    typingDiv.innerText = `${user} is typing...`;
+    chatContainer.appendChild(typingDiv);
+  }
+
+  // here we clear if the user is typing againe
+  if (typingTimers[user]) {
+    clearTimeout(typingTimers[user]);
+  }
+
+  typingTimers[user] = setTimeout(() => {
+    hideTypingIndicator(user);
+  }, 2000);
+
+}
+
+function hideTypingIndicator(user) {
+  const typingDiv = document.getElementById(`typing_${user}`);
+  if (typingDiv) {
+    typingDiv.remove();
+  }
+}
+
+
+
+// TYPING===============*************************
 
 async function sendMessage(btn) {
-  let name = null
-  try{
-    const { state } = await window.checkIfLoggedIn()
+  let name = null;
+  try {
+    const { state } = await window.checkIfLoggedIn();
     if (!state) {
       createAlert(alert("alert-danger", "you need to login!!!"));
-      return
+      return;
     }
-    
+
     let messageInput = document.getElementById("messageInput");
-    name = btn.getAttribute("sendto")
-    if(!name){
+    name = btn.getAttribute("sendto");
+    if (!name) {
       createAlert(alert("alert-danger", "error select user"));
-      return
+      return;
     }
-    if(messageInput.value.length > 160){
-      createAlert(alert("alert-danger", "message to long max 160"));
-      return
+    if (messageInput.value.length > 160) {
+      createAlert(alert("alert-danger", "message too long max 160"));
+      return;
     }
     if (!messageInput.value.trim()) return;
-    
+
+    // Send message
     socket.send(
       JSON.stringify({
         text: messageInput.value,
@@ -68,26 +107,60 @@ async function sendMessage(btn) {
         timestamp: new Date(),
       })
     );
-  }catch(err){
-    createAlert(alert("alert-danger", "feaild to send message"));
-    console.error(err);
-    return
-  }
-  addMyMessage(messageInput.value)
-  const contanerUser = document.getElementById(`contaner_${name}`)
-  const newUser = document.createElement('div');
-  newUser.id = `contaner_${name}`;
-  newUser.classList.add('messageProfile', 'selectUser');
-  newUser.setAttribute("onclick", "clickusers(this)");
 
+    // Stop typing notification since the message is sent
+    sendTypingNotification(name, false);
+  } catch (err) {
+    createAlert(alert("alert-danger", "failed to send message"));
+    console.error(err);
+    return;
+  }
+
+  addMyMessage(messageInput.value);
+  const contanerUser = document.getElementById(`contaner_${name}`);
+  const newUser = document.createElement("div");
+  newUser.id = `contaner_${name}`;
+  newUser.classList.add("messageProfile", "selectUser");
+  newUser.setAttribute("onclick", "clickusers(this)");
 
   newUser.innerHTML = contanerUser.innerHTML;
   usrsContenar.insertBefore(newUser, usrsContenar.firstChild);
-  lastSelect = usersContenar.firstChild.id
+  lastSelect = usersContenar.firstChild.id;
   usrsContenar.removeChild(contanerUser);
   messageInput.value = "";
-
 }
+
+// Send typing notification to the backend
+function sendTypingNotification(receiver, isTyping) {
+  if (!socket || socket.readyState !== WebSocket.OPEN) return;
+  socket.send(
+    JSON.stringify({
+      type: "typing",
+      receiver: receiver,
+      typing: isTyping,
+    })
+  );
+}
+
+// Detect when user starts typing and send notification
+let typingTimeout;
+document.getElementById("messageInput").addEventListener("input", function () {
+  const receiver = document.querySelector("[sendto]")?.getAttribute("sendto");
+  if (!receiver) return;
+
+  // Send "typing" status
+  sendTypingNotification(receiver, true);
+
+  // Clear previous timeout and set a new one to stop typing notification
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(() => {
+    sendTypingNotification(receiver, false);
+  }, 3000); // Stops typing after 3 seconds of inactivity
+});
+
+
+// *******************************************************************************************
+
 
 function closeWS() {
   socket.close();
@@ -119,7 +192,7 @@ async function getusers(first) {
     }
 
     const data = await response.json();
-    
+
     if (!data || (data.length === 1 && data[0].nickname === window.username)) {
       isMoerUsers = false
       usrsContenar.innerHTML += end("no more usres");

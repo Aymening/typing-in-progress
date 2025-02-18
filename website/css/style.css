@@ -587,3 +587,16 @@ label:last-child span {
   margin: 10px;
   text-align: center;
 }
+/* typing **************************************** */
+
+.typing-indicator {
+  font-style: italic;
+  color: gray;
+  opacity: 0.8;
+  animation: fadeInOut 1s infinite alternate;
+}
+
+@keyframes fadeInOut {
+  from { opacity: 0.8; }
+  to { opacity: 0.3; }
+}

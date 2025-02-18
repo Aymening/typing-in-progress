@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
 	"time"
@@ -18,6 +19,7 @@ var upgrader = websocket.Upgrader{
 }
 
 type Message struct {
+	Type      string    `json:"type"` //"message" ola "typing"
 	Text      string    `json:"text"`
 	Sender    string    `json:"sender"`
 	Receiver  string    `json:"receiver"`
@@ -86,6 +88,12 @@ func reader(conn *websocket.Conn, sender string) {
 		}
 		msg.Sender = sender
 
+		// TYPING
+		if msg.Type == "typing" {
+			sendTypingNotification(sender, msg.Receiver)
+			continue
+		}
+
 		if msg.Text == "" {
 			return
 		}
@@ -117,6 +125,28 @@ func reader(conn *websocket.Conn, sender string) {
 			}
 		}
 
+	}
+}
+
+// Function to send typing notification ********************************************************************
+func sendTypingNotification(sender, receiver string) {
+	notification := Message{
+		Type:     "typing",
+		Sender:   sender,
+		Receiver: receiver,
+	}
+
+	clients.RLock()
+	receiverConns, ok := clients.m[receiver]
+	clients.RUnlock()
+
+	if ok {
+		for _, con := range receiverConns {
+			err := con.WriteJSON(notification)
+			if err != nil {
+				log.Println("Error sending typing notification:", err)
+			}
+		}
 	}
 }
 
