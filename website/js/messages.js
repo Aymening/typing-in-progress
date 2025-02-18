@@ -108,7 +108,7 @@ async function sendMessage(btn) {
       })
     );
 
-    // Stop typing notification since the message is sent
+    // Stop typing notification since the message is sent**************************************************************
     sendTypingNotification(name, false);
   } catch (err) {
     createAlert(alert("alert-danger", "failed to send message"));

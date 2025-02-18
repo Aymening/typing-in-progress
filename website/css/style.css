@@ -591,7 +591,8 @@ label:last-child span {
 
 .typing-indicator {
   font-style: italic;
-  color: gray;
+  margin-left: 40px;
+  color: rgb(248, 240, 240);
   opacity: 0.8;
   animation: fadeInOut 1s infinite alternate;
 }
