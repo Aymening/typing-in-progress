@@ -55,7 +55,6 @@ async function showTypingIndicator(user) {
     clearTimeout(loop[user]);
   }
 
-  // Set a timeout to hide the typing indicator after 2 seconds of inactivity
   loop[user] = setTimeout(() => {
     typing.classList.add("none");
   }, 1000);
