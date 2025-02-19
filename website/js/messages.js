@@ -42,65 +42,25 @@ function msessagesWS() {
   };
 }
 // typing indicators*********************************************
-let typingTimers = {};
-let isAlredyAdd = false
-function showTypingIndicator(user) {
-  if(isAlredyAdd) return
+let loop = {};
+async function showTypingIndicator(user) {
 
   const chatContainer = document.getElementById(`contaner_${user}`)
   if (!chatContainer) return;
+  
+  let typing = chatContainer.querySelector("#typinggg")
+  typing.classList.remove("none")
 
-  // let typingDiv = document.getElementById(`typing_${user}`);
-  // if (!typingDiv) {
+  if (loop[user]) {
+    clearTimeout(loop[user]);
+  }
 
-  let typingDiv = document.createElement("div");
-  typingDiv.id = `typingg${user}`;
-  // typingDiv.className = "typing-indicator";
-  typingDiv.innerHTML = `<div class="loading">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          </div>`;
-
-  chatContainer.appendChild(typingDiv)
-  isAlredyAdd = true
-  //}
-
-
-  setTimeout(() => {
-    
-    typingDiv.remove()
-    console.log('ezez');
-    isAlredyAdd = false
-  }, 2000);
-
-  // here we clear if the user is typing againe
-  // if (typingTimers) {
-  //   console.log('ya rbi');
-
-  //   clearTimeout(typingTimers);
-  // }
-
-  // typingTimers = setTimeout(() => {
-  //   hideTypingIndicator(typingDiv);
-  //   console.log('ezez');
-
-  // }, 500);
+  // Set a timeout to hide the typing indicator after 2 seconds of inactivity
+  loop[user] = setTimeout(() => {
+    typing.classList.add("none");
+  }, 1000);
 
 }
-
-// function hideTypingIndicator(typingDiv) {
-//   const typingDiv = document.querySelector("");
-//   // console.log(typingDiv);
-
-//   if (typingDiv) {
-//     console.log("fffffffffffffff");
-
-//     typingDiv.remove();
-//   }
-// }
-
-
 
 // TYPING===============*************************
 
@@ -243,6 +203,13 @@ function usertemplate(usr) {
                 <p>${usr.firstname} ${usr.lastname}</p>
             </div>
             <label id="label_${usr.nickname}"></label>
+            <div id="typinggg" class="none">
+              <div class="loading none">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
         </div>`;
 }
 

@@ -94,10 +94,6 @@ func reader(conn *websocket.Conn, sender string) {
 			continue
 		}
 
-		if msg.Text == "" {
-			return
-		}
-
 		// save message
 		err = saveMessage(sender, msg)
 		if err != nil {

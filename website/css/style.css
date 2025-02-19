@@ -417,14 +417,14 @@ button:active {
 .users_contenar {
   overflow: scroll;
   height: 300px;
-  width: 200px;
+  width: 250px;
   border-bottom: 2px solid var(--third-color);
 }
 
 .chatbtninput {
   height: inherit;
   flex-grow: 2;
-  max-width: calc(100% - 200px);
+  max-width: calc(100% - 250px);
   border-left: 2px solid var(--third-color);
 }
 
@@ -594,8 +594,8 @@ label:last-child span {
   justify-content: center;
 
   div {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.4rem;
+    height: 0.4rem;
     margin: 1rem 0.2rem;
     background: var(--notification-color);
     border-radius: 50%;
